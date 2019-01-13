@@ -90,7 +90,7 @@ if __name__ == "__main__":
                                   [ax2_title]])
 
     '''
-    plotter = MatplotlibTemplate(3, 2,
+    plotter = MatplotlibStarter(3, 2,
                                  [[a, b, c],
                                   [d, e, f]])
     '''
