@@ -12,7 +12,7 @@ class MetaData:
         self.start = start   # plot from x after self.start
         self.lambda_function = lambda_function   # convert x, y raw values in file, with your customized function
         
-class MatplotlibTemplate:
+class MatplotlibStarter:
     def __init__(self, vsplit, hsplit, metadata_list, titles_list, real_time=False, split_char=" "):
         self.fig = plt.figure(figsize=(6, 4))
         
@@ -48,7 +48,7 @@ class MatplotlibTemplate:
                             y = lambda_y(float(number_vector[metadata.rows[1]]))
                             cnt += 1
 
-                            if start == None or x < start:
+                            if start != None and x < start:
                                 continue
                             
                             x_list.append(x)                                
@@ -66,16 +66,24 @@ class MatplotlibTemplate:
     
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, lambda signal, frame: sys.exit(0))
-    
+
+    '''
     ax1 = [MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log_with_robust.log", [-1, 2], label="Pitch", color="blue", start=3200),
          MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log_with_robust.log", [-1, 3], label="Yaw", color="green", start=3200)]
     ax2 = [MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log_with_robust.log", [-1, 0], label="u1", color="purple", start=3200, lambda_function=[lambda x:x, lambda x:x-0.7]),
-         MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log_with_robust.log", [-1, 1], label="u2", color="yellow", start=3200, lambda_function=[lambda x:x, lambda x:x*20])]
+         MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log_with_robust.log", [-1, 1], label="u2", color="orange", start=3200, lambda_function=[lambda x:x, lambda x:x*20])]
+    '''
 
-    ax1_title = ["State of Diabolo", "time", ""]
-    ax2_title = ["Input from Roobot", "time", ""]
+    ax1 = [MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log.log", [-1, 2], label="Pitch", color="blue"),
+         MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log.log", [-1, 3], label="Yaw", color="green")]
+    ax2 = [MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log.log", [-1, 0], label="u1", color="purple", lambda_function=[lambda x:x, lambda x:x-0.7]),
+         MetaData("/home/takayuki/ros/kinetic/src/jsk_diabolo_pr2/log/log-by-logger/sample_log.log", [-1, 1], label="u2", color="orange", lambda_function=[lambda x:x, lambda x:x*20])]
+
     
-    plotter = MatplotlibTemplate(2, 1,
+    ax1_title = ["State of Diabolo", "step", "degree"]
+    ax2_title = ["Manipulation from Robot", "step", ""]
+    
+    plotter = MatplotlibStarter(2, 1,
                                  [[ax1],
                                   [ax2]],
                                  [[ax1_title],
