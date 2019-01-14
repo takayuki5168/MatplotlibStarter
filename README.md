@@ -4,6 +4,7 @@ Matplotlib Starter
 Start Plotting with Matplotlib easily and freely.
 
 You can designate below infomation for each graph.
+
 | variable name | description |
 ----|----
 | file_name | file_name |
