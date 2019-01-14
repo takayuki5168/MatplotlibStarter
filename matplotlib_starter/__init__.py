@@ -9,13 +9,16 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 class MetaData:
-    def __init__(self, file_name, rows, label="", color=None, start=None, end=None, lambda_function=[lambda x:x, lambda x:x]):
+    def __init__(self, file_name, rows, label="", color=None, marker=None, start=None, end=None, thin_out=1, plot_type="plot", lambda_function=[lambda x:x, lambda x:x]):
         self.file_name = file_name
         self.rows = rows    # rows of x, y in file
         self.label = label
         self.color = color
+        self.marker = marker
         self.start = start   # plot from x of self.start
         self.end = end   # plot by x of self.end
+        self.thin_out = thin_out
+        self.plot_type = plot_type
         self.lambda_function = lambda_function   # convert x, y raw values in file, with your customized function
         
 class MatplotlibStarter:
@@ -34,12 +37,15 @@ class MatplotlibStarter:
                 self.axes[v][h].set_ylabel(titles_list[v][h][2])
                 for metadata_idx in range(len(metadata_list[v][h])):
                     metadata = metadata_list[v][h][metadata_idx]
-                    lambda_x = metadata.lambda_function[0]
-                    lambda_y = metadata.lambda_function[1]
                     label = metadata.label
                     color = metadata.color
+                    marker = metadata.marker
                     start = metadata.start
                     end = metadata.end
+                    thin_out = metadata.thin_out
+                    plot_type = metadata.plot_type
+                    lambda_x = metadata.lambda_function[0]
+                    lambda_y = metadata.lambda_function[1]
                     
                     with open(metadata.file_name, "r") as f:
                         x_list = []
@@ -57,20 +63,26 @@ class MatplotlibStarter:
                             y = lambda_y(float(number_vector[metadata.rows[1]]))
                             cnt += 1
 
+                            # start and end
                             if start != None and x < start:
                                 continue
                             elif end != None and x > end:
                                 continue
                             if start != None:
                                 x = x - start
+
+                            # thin out
+                            if cnt % thin_out != 0:
+                                continue
                             
                             x_list.append(x)                                
                             y_list.append(y)
-                            
-                        if color == None:
-                            self.lines[v][h][metadata_idx], = self.axes[v][h].plot(np.array(x_list), np.array(y_list), label=metadata.label)
-                        else:
-                            self.lines[v][h][metadata_idx], = self.axes[v][h].plot(np.array(x_list), np.array(y_list), label=metadata.label, color=color)
+
+                        if plot_type == "plot":
+                            self.lines[v][h][metadata_idx], = self.axes[v][h].plot(np.array(x_list), np.array(y_list), marker=marker, label=metadata.label, color=color)
+                        elif plot_type == "scatter":
+                            #self.lines[v][h][metadata_idx], = self.axes[v][h].scatter(np.array(x_list), np.array(y_list), marker=marker, label=metadata.label, color=color)                            
+                            self.axes[v][h].scatter(np.array(x_list), np.array(y_list), marker=marker, label=metadata.label, color=color)                            
                 self.axes[v][h].legend()
                 
         plt.show()
