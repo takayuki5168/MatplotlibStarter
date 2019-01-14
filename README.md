@@ -1,7 +1,16 @@
 Matplotlib Starter
 =================
 
-Start Plotting with Matplotlib easily and freely
+Start Plotting with Matplotlib easily and freely.
+
+You can designate below infomation for each graph.
+- file_name        file_name
+- rows             rows of x, y value of graph in the file
+- label            name of graph
+- color            color of graph
+- start            x value when to start plotting
+- end              x value when to end plotting
+- lambda_function  lambda function of data processing for x, y value
 
 ## Install
 ```bash

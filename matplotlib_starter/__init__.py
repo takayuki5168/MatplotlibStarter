@@ -16,8 +16,8 @@ class MetaData:
         self.rows = rows    # rows of x, y in file
         self.label = label
         self.color = color
-        self.start = start   # plot from x after self.start
-        self.end = end   # plot by x after self.end
+        self.start = start   # plot from x of self.start
+        self.end = end   # plot by x of self.end
         self.lambda_function = lambda_function   # convert x, y raw values in file, with your customized function
         
 class MatplotlibStarter:
