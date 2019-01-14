@@ -47,11 +47,11 @@ plotter.execute(2, 1,
 
 You can execute like below.
 
-See [example](https://github.com/takayuki5168/matplotlib-starter/example).
-
 ```bash
 $ cd example
 $ python plot.py
 ```
 
 ![Graph](https://github.com/takayuki5168/MatplotlibStarter/blob/master/example/image/sample.png)
+
+See [example](https://github.com/takayuki5168/MatplotlibStarter/tree/master/example).
