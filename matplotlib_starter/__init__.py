@@ -8,8 +8,6 @@ __version__ = pkg_resources.get_distribution(
 from matplotlib import pyplot as plt
 import numpy as np
 
-import sys, signal
-
 class MetaData:
     def __init__(self, file_name, rows, label="", color=None, start=None, end=None, lambda_function=[lambda x:x, lambda x:x]):
         self.file_name = file_name
