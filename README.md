@@ -8,12 +8,12 @@ You can designate below infomation for each graph.
 | variable name | description |
 ----|----
 | file_name | file_name |
-| rows | rows of x, y value of graph in the file |
+| rows | rows of X, Y value of graph in the file |
 | label | name of graph |
 | color | color of graph |
-| start | x value when to start plotting |
-| end | x value when to end plotting |
-| lambda_function | lambda function of data processing for x, y value |
+| start | X value when to start plotting |
+| end | X value when to end plotting |
+| lambda_function | lambda function of data processing for X, Y value |
 
 ## Install
 ```bash
