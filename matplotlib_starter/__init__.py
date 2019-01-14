@@ -69,7 +69,6 @@ class MatplotlibStarter:
                             x_list.append(x)                                
                             y_list.append(y)
                             
-                        print(label)
                         if color == None:
                             self.lines[v][h][metadata_idx], = self.axes[v][h].plot(np.array(x_list), np.array(y_list), label=metadata.label)
                         else:
